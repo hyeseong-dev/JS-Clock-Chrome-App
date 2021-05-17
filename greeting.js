@@ -13,6 +13,7 @@ function handleSubmit(event) {
     event.preventDefault();             // a 태그나 submit 태그는 누르게 되면 href 를 통해 이동하거나 , 창이 새로고침하여 실행됩니다. preventDefault 를 통해 이러한 동작을 막아줄 수 있습니다.
     const currentValue = input.value;
     paintGreeting(currentValue);
+    saveName(currentValue);
 }
 
 function askForName() {
@@ -23,10 +24,8 @@ function askForName() {
 
 function paintGreeting(text) {
     form.classList.remove(SHOWING_CN)
-    const currentValue = input.value;
     greeting.classList.add(SHOWING_CN);
     greeting.innerHTML = `Hello ${text}`
-    saveName(currentValue);
 }
 
 function loadName() {
