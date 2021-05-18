@@ -4,10 +4,6 @@ const toDoForm = document.querySelector('.js-toDoForm'), // 여기서는 모듈�
 
 const TODOS_LS = "toDos";
 
-function filterFn(toDo) { // 매개변수는 JSON객체를 지칭
-    return toDo.id === 1
-}
-
 let toDos = [];
 let idNumbers = 1;
 
@@ -15,9 +11,9 @@ function deleteToDo(event) {
     const btn = event.target;
     const li= btn.parentNode;
     toDoList.removeChild(li);
-    const cleanToDos = toDos.filter(function(toDo) {
-        return toDo.id != parseInt(li.id)
-    });
+    const cleanToDos = toDos.filter(function(toDo) { // 파이썬의 for i in [1,2,3,4]: 처럼 iterable 객체에서 하나씩 던져주는것과 비슷하게 toDo도 하나씩 받게됨
+        return toDo.id != parseInt(li.id)            // li.id는 유저가 직접 삭제 버튼을 클릭한 그 해당 값을 지칭함.
+    });                                              // 기준점은 li.id이며 loop를 돌면서 toDo.id가 기준 값과 다르면 참으로 인식하고 이를 cleanToDos에 저장하고 이를 다시 기존 toDos배열에 저장함.
     toDos = cleanToDos
     saveToDos();
 }
