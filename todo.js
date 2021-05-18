@@ -4,16 +4,30 @@ const toDoForm = document.querySelector('.js-toDoForm'), // 여기서는 모듈�
 
 const TODOS_LS = "toDos";
 
+const toDos = [];
+
+function saveToDos() { // localStorage에 toDos내용들을 저장함.
+    localStorage.setItem(TODOS_LS, JSON.stringify(toDos));
+}
 
 function paintToDo(text) {
     const li = document.createElement("li");
     const delBtn = document.createElement("button");
-    delBtn.innerText = "❌";
     const span = document.createElement("span");
+    const newId = toDos.length + 1;
+
+    delBtn.innerText = "❌";
     span.innerText = text;
     li.appendChild(delBtn);
     li.appendChild(span);
+    li.id = newId;              //li 태그의 속성인 id는 html태그의 li태그의 id속성에 대응됨.
     toDoList.appendChild(li);
+    const toDoObj = {
+        text: text,
+        id: newId,
+    };
+    toDos.push(toDoObj);
+    saveToDos();
 }
 
 function handleSubmit(event) {
@@ -24,8 +38,10 @@ function handleSubmit(event) {
 }
 
 function loadToDos() {
-    const toDos = localStorage.getItem(TODOS_LS);
-    if (toDos !== null) {
+    const loadedToDos = localStorage.getItem(TODOS_LS);
+    if (loadedToDos !== null) {
+        const parsedToDos = JSON.parse(loadedToDos);
+        
     }
 }
 
